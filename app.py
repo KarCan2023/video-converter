@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 import requests
 import streamlit as st
 import imageio_ffmpeg
+import pathlib
 
 # -----------------------------
 # Helpers
