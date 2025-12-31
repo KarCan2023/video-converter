@@ -1,4 +1,5 @@
 streamlit==1.37.0
 imageio-ffmpeg==0.5.1
 requests==2.32.3
-yt-dlp==2025.12.8
+yt-dlp==2025.12.08 # Use a recent version[citation:1]
+yt-dlp-ejs # Add this line
