@@ -58,14 +58,19 @@ def download_direct_url_to_temp(url: str) -> str:
 
 def download_youtube_to_temp(url: str) -> str:
     """
-    Descarga video/audio de YouTube usando yt-dlp
+    Descarga video/audio de YouTube usando yt-dlp con FFmpeg empaquetado
     """
+    # Obtener FFmpeg de imageio_ffmpeg
+    ffmpeg_path = get_ffmpeg_path()
+    
     ydl_opts = {
         'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
         'outtmpl': os.path.join(tempfile.gettempdir(), '%(id)s.%(ext)s'),
         'quiet': True,
         'no_warnings': True,
         'noplaylist': True,
+        'ffmpeg_location': ffmpeg_path,  # ¡CRUCIAL! Usar FFmpeg empaquetado
+        'merge_output_format': 'mp4',
     }
     
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -75,7 +80,6 @@ def download_youtube_to_temp(url: str) -> str:
             
             # Si el archivo tiene extensión diferente, buscar el descargado
             if not os.path.exists(downloaded_file):
-                # Buscar archivo en el directorio temporal
                 temp_dir = tempfile.gettempdir()
                 video_id = info.get('id', '')
                 for file in os.listdir(temp_dir):
