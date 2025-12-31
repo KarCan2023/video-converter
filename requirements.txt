@@ -2,3 +2,4 @@ streamlit==1.37.0
 imageio-ffmpeg>=0.5.1
 requests>=2.32.3
 yt-dlp>=2024.4.9
+pydub==0.25.1  # Opcional: para manipulación de audio adicional
